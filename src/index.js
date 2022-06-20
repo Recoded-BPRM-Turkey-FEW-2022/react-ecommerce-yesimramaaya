@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AllProducts from "./routes/AllProducts";
 import Cart from "./routes/Cart";
 import Product from "./routes/Product";
+import NotFound from "./routes/NotFound"
 
 
 
@@ -16,15 +17,19 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
+    
+    <BrowserRouter>
     <div>
       <Navbar />
     </div>
-    <BrowserRouter>
     <Routes>
     
     <Route path="/allproducts" element={<AllProducts />} />
     <Route path="/cart" element={<Cart />}/>
     <Route path="/product" element={<Product />} />
+    <Route  element={<NotFound />} />
+
+
     </Routes>
     </BrowserRouter>
   </StrictMode>
