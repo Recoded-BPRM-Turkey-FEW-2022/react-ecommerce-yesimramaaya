@@ -3,8 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "bootstrap": "^5.2.0-beta1",
+    "font-awesome": "^4.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.1",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "reactstrap": "^9.1.1",
+    "redux": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -13,7 +24,9 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "react-scripts": "^5.0.1"
+    "css-loader": "^6.7.1",
+    "react-scripts": "^5.0.1",
+    "style-loader": "^3.3.1"
   },
   "browserslist": {
     "production": [
