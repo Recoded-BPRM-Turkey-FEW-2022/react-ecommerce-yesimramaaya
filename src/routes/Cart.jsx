@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Card() {
+function Cart() {
     return (
         <h1>sdfghjkölçdfghjkölç</h1>
     )
 }
 
-export default Card
+export default Cart;
