@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom'
-import { NavLink } from "react-router-dom"
+import { NavLink ,Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faCartShopping, faSignIn } from '@fortawesome/free-solid-svg-icons'
 
@@ -22,10 +22,10 @@ export default function Navbar() {
                                 <a class="nav-link active fw-bold" aria-current="page" href="#">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="#">Jewellery</a>
+                                <Link to={`filter/jewelery`} class="nav-link active fw-bold" aria-current="page" href="#">Jewellery</Link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active fw-bold" aria-current="page" href="#">Men's Clothing</a>
+                            <Link to={`filter/MensClothing`} class="nav-link active fw-bold" aria-current="page" href="#">Men's Clothing</Link>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active fw-bold" aria-current="page" href="#">Women's Clothing</a>
