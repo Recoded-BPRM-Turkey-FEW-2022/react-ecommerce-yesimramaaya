@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
 const queryClient = new QueryClient()
 
@@ -24,20 +25,53 @@ function FetchProducts() {
 
     if (error) return 'An error has occurred: ' + error.message
     return (
-        <div style={{ margin: '40px' }} >
+
+
+
+        <div className='row'>
             {data.map(res => (
-                <div key={res.id}>
-                    <Link to={`/products/${res.id}`}>
-                    <h2> {res.title}</h2>
-                    <p> {res.description}</p>
-                    <img  src={res.image} alt={res.title} />
-                    <p> {res.category}</p>
-                    <p> {res.rating.count} {res.rating.rate}</p>
+                <div className='col-md-3 mb-4' >
+                <Link to={`/products/${res.id}`}>
+                    <Card className='h-100 text-center p-4 mb-4'>
+                        <CardImg
+                            alt="Card image cap"
+                            src={res.image}
+                            top
+                            width="100%"
+                            height="300px"
+                        />
+                        <CardBody>
+                            <CardTitle className='' tag="h5">{res.title}
+                            </CardTitle>
+                            <CardSubtitle
+                                className="mb-2 text-muted"
+                                tag="h6"
+                            >
+                                {res.rating.rate}/5 rating
+                            </CardSubtitle>
+                            <h4> ${res.price}</h4>
+
+
+                        </CardBody>
+                    </Card>
                     </Link>
                 </div>
+
+
             ))}
         </div>
+
     )
 }
+
+
+
+
+
+
+
+
+
+
 
 

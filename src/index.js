@@ -22,6 +22,7 @@ root.render(
       <Navbar />
     </div>
     <Routes>
+    
     <Route path="/products" element={<AllProducts />} />
     <Route path="/cart" element={<Cart />}/>
     <Route path="/products/:id" element={<Product />} />
