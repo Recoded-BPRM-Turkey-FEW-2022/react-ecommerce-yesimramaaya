@@ -22,13 +22,10 @@ root.render(
       <Navbar />
     </div>
     <Routes>
-    
-    <Route path="/allproducts" element={<AllProducts />} />
+    <Route path="/products" element={<AllProducts />} />
     <Route path="/cart" element={<Cart />}/>
-    <Route path="/product" element={<Product />} />
+    <Route path="/products/:id" element={<Product />} />
     <Route  element={<NotFound />} />
-
-
     </Routes>
     </BrowserRouter>
   </StrictMode>
