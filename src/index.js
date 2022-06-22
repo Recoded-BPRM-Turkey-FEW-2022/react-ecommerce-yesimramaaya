@@ -9,8 +9,7 @@ import AllProducts from "./routes/AllProducts";
 import Cart from "./routes/Cart";
 import Product from "./routes/Product";
 import NotFound from "./routes/NotFound"
-
-
+import Filter from "./components/Filter";
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
@@ -22,10 +21,11 @@ root.render(
       <Navbar />
     </div>
     <Routes>
-    
     <Route path="/products" element={<AllProducts />} />
     <Route path="/cart" element={<Cart />}/>
     <Route path="/products/:id" element={<Product />} />
+    <Route path="/filter/jewelery" element={<Filter />}/>
+    <Route path="filter/MensClothing" element={<Filter />}/>
     <Route  element={<NotFound />} />
     </Routes>
     </BrowserRouter>
