@@ -1,41 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import {useQuery } from 'react-query'
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
-const queryClient = new QueryClient()
+const AllProducts=()=>{
+    const [maxPrice, setmaxPrice]=useState(0);
 
-
-export default function AllProducts() {
-    return (
-        <QueryClientProvider client={queryClient}>
-            <FetchProducts />
-        </QueryClientProvider>
-    )
-
-}
-function FetchProducts() {
-    const { isLoading, error, data } = useQuery('repoData', () =>
-        fetch('https://fakestoreapi.com/products').then(res =>
-            res.json()
+    const { isLoading, error, data } = useQuery('products', () =>{
+        return fetch('https://api.escuelajs.co/api/v1/products').then(data =>
+            data.json()
         )
-    )
+});
+    const [filterData,setfilterData]=useState(data);
     console.log(data)
-    if (isLoading) return 'Loading...'
+    if (isLoading) return 'Loading...';
 
-    if (error) return 'An error has occurred: ' + error.message
+    useEffect(()=>{
+        if(maxPrice>0){
+            const filteredByPrice=data.filter(
+                (product)=>product.price< maxPrice
+            );
+            setfilterData(filteredByPrice)
+        }
+        else{
+            setfilterData(data)
+        }
+    },[maxPrice]);
+
+
     return (
-
-
-
         <div className='row'>
-            {data.map(res => (
+            <div  className="col-md-3 col-centered">
+                <input type="number" name="quantiy" placeholder='Max Price' value={maxPrice} onChange={(e)=>{
+                    setmaxPrice(e.target.value)
+                }} />
+            </div>
+            {filterData && filterData.map(res => (
                 <div className='col-md-3 mb-4' >
                 <Link to={`/products/${res.id}`}>
                     <Card className='h-100 text-center p-4 mb-4'>
                         <CardImg
                             alt="Card image cap"
-                            src={res.image}
+                            src={res.images}
                             top
                             width="100%"
                             height="300px"
@@ -47,24 +53,21 @@ function FetchProducts() {
                                 className="mb-2 text-muted"
                                 tag="h6"
                             >
-                                {res.rating.rate}/5 rating
+                                {res.name}
                             </CardSubtitle>
                             <h4> ${res.price}</h4>
-
-
                         </CardBody>
                     </Card>
                     </Link>
                 </div>
-
-
             ))}
         </div>
 
     )
+
 }
 
-
+export default AllProducts; 
 
 
 
