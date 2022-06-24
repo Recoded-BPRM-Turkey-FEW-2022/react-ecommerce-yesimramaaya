@@ -1,0 +1,10 @@
+{
+  "cart": [
+    {
+      "id": 2,
+      "title": "Ergonomic Concrete Ball",
+      "price": 23,
+      "quantity": 1
+    }
+  ]
+}
