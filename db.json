@@ -1,0 +1,16 @@
+{
+  "cart": [
+    {
+      "id": 1,
+      "title": "Cooler",
+      "price": 125,
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "title": "Ergonomic Concrete Ball",
+      "price": 23,
+      "quantity": 1
+    }
+  ]
+}

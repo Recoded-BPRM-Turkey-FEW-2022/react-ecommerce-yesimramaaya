@@ -1,56 +1,65 @@
-import React from 'react';
-import { useParams,Link } from "react-router-dom";
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import React, { useState } from 'react';
+import { useParams, Link } from "react-router-dom";
+import { useQuery, useMutation } from 'react-query';
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
-const queryClient = new QueryClient()
- 
+
 function Product() {
-  return (
-    <QueryClientProvider client={queryClient}>
-        <FetchProducts />
-    </QueryClientProvider>
-)
-}
-function FetchProducts() {
-  let userId = useParams();
-  console.log(userId.id)
-  const { isLoading, error, data } = useQuery('repoData', () =>
-        fetch(`https://fakestoreapi.com/products/${userId.id}`).then(res =>
+    let { id } = useParams();
+    const [quantity, setQuantity] = useState(1);
+    console.log(id)
+    const { isLoading, error, data } = useQuery(`/products/${id}`, () => {
+        return fetch(`https://api.escuelajs.co/api/v1/products/${id}`).then(res =>
             res.json()
-        )
-    )
+        );
+    });
     console.log(data)
+    const addToCart = useMutation((cartData) => {
+        return fetch("http://localhost:3002/cart", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "content-Type": "application/json"
+            },
+            body: JSON.stringify(cartData),
+        })
+    });
     if (isLoading) return 'Loading...'
 
     if (error) return 'An error has occurred: ' + error.message
     return (
-      <div className='row'>
-              <div className='col-md-3 mb-4' >
-              <Link to={`/products/${data.id}`}>
-                  <Card className='h-100 text-center p-4 mb-4'>
-                      <CardImg
-                          alt="Card image cap"
-                          src={data.image}
-                          top
-                          width="100%"
-                          height="300px"
-                      />
-                      <CardBody>
-                          <CardTitle className='' tag="h5">{data.title}
-                          </CardTitle>
-                          <CardSubtitle
-                              className="mb-2 text-muted"
-                              tag="h6"
-                          >
-                              {data.rating.rate}/5 rating
-                          </CardSubtitle>
-                          <h4> ${data.price}</h4>
-                      </CardBody>
-                  </Card>
-                  </Link>
-              </div>
-          ))
-      </div>
+        <>
+            <div className='col-md-6'>
+                <img src={data.images} alt={data.title}
+                    height="400px" width="400px" />
+            </div>
+            <div className='col-md-6'>
+                <h4 className='text-uppercase text-black-50'>{data.category.id}
+                </h4>
+                <h1 className='display-5'>{data.title}</h1>
 
-  )}
+                <h3 className='display-6 fw-bold my-4'>${data.price}</h3>
+                <p className='lead '>{data.description}</p>
+                <input className='btn-outline-dark px-4 py-2 rounded-5 border-dark' placeholder="Quantity" type="number" value={quantity} onChange={(e) => {
+                    setQuantity(e.target.value)
+                }}
+                />
+                <button className="border border-dark px-4 py-2 m-4 rounded-5" onClick={() => {
+                    addToCart.mutate({
+                        id: data.id,
+                        image: data.images,
+                        title: data.title,
+                        price: data.price,
+                        quantity: quantity,
+
+                    });
+
+                }}
+                >
+                    Add to Cart</button>
+            </div>
+        </>
+
+    )
+}
+
 export default Product
